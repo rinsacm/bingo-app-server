@@ -1,0 +1,29 @@
+
+# npm
+node_modules
+package-lock.json
+*.log
+*.gz
+
+
+
+
+
+
+# production
+/build
+/dist
+  
+# misc
+package-lock.json
+package.json.bak
+.DS_Store
+
+# config file
+.vscode
+.env
+
+
+
+#react
+build
