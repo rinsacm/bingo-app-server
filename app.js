@@ -11,7 +11,7 @@ const io = new Server(server, {
 });
 const cors = require("cors");
 let indexRouter = require("./routes/index");
-equire('dotenv').config()
+require('dotenv').config()
 const PORT = process.env.PORT;
 let corsOptins = {
   origin: "*",
