@@ -7,13 +7,13 @@ const { Server } = require("socket.io");
 let users = [];
 currPlayerInd = 0;
 const io = new Server(server, {
-  cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
+  cors: { origin: "*", methods: ["GET", "POST"] },
 });
 const cors = require("cors");
 let indexRouter = require("./routes/index");
-const PORT = 3001;
+const PORT = env.PORT;
 let corsOptins = {
-  origin: "http://localhost:3000",
+  origin: "*",
   crossOrigin: true,
   credentials: true,
 };
