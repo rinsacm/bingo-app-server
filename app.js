@@ -89,6 +89,9 @@ io.on("connection", (socket) => {
     let roomInd = checkRoomExists(room);
     let currPlayerInd = rooms[roomInd]["currPlayerInd"];
     socket.to(room).emit("playednum", { num: num, socketid: socketid });
+    socket.broadcast
+      .to(socketid)
+      .emit("playednum", { num: num, socketid: socketid });
 
     console.log("ind ", currPlayerInd, "socket ", socket.id);
 
