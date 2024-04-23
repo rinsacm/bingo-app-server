@@ -73,6 +73,8 @@ io.on("connection", (socket) => {
   socket.on("start_game", (room) => {
     io.to(room).emit("started");
     let roomInd = checkRoomExists(room);
+    rooms[roomInd]["currPlayerInd"] = 0;
+
     let currPlayerInd = rooms[roomInd]["currPlayerInd"];
     let currPlayer = rooms[roomInd]["users"][currPlayerInd]["socketid"];
     if (currPlayer == socket.id) io.to(room).emit("play");
