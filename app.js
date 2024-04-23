@@ -84,7 +84,7 @@ io.on("connection", (socket) => {
         .emit("play");
   });
   socket.on("restart", (room) => {
-    socket.broadcast.emit("restart");
+    socket.to(room).emit("restart");
     socket.emit("restart");
   });
   socket.on("played", (num, room, socketid) => {
