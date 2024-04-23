@@ -77,7 +77,7 @@ io.on("connection", (socket) => {
 
     let currPlayerInd = rooms[roomInd]["currPlayerInd"];
     let currPlayer = rooms[roomInd]["users"][currPlayerInd]["socketid"];
-    if (currPlayer == socket.id) io.to(room).emit("play");
+    if (currPlayer == socket.id) socket.emit("play");
     else
       socket.broadcast
         .to(rooms[roomInd]["users"][currPlayerInd]["socketid"])
@@ -90,10 +90,8 @@ io.on("connection", (socket) => {
   socket.on("played", (num, room, socketid) => {
     let roomInd = checkRoomExists(room);
     let currPlayerInd = rooms[roomInd]["currPlayerInd"];
+    socket.emit("playednum", { num: num, socketid: socketid });
     socket.to(room).emit("playednum", { num: num, socketid: socketid });
-    socket.broadcast
-      .to(socketid)
-      .emit("playednum", { num: num, socketid: socketid });
 
     console.log("ind ", currPlayerInd, "socket ", socket.id);
 
