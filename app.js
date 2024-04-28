@@ -36,6 +36,7 @@ io.on("connection", (socket) => {
   socket.on("join", (username, room) => {
     socket.join(room);
     let res = checkRoomExists(room);
+    socket.emit("getmysocketDetail", socket.id);
     if (res == -1) {
       let temp = {};
       temp["roomName"] = room;
@@ -61,8 +62,8 @@ io.on("connection", (socket) => {
       //   "join",
       //   rooms[res]["users"][rooms[res]["users"].length - 1]["name"]
       // );
-      socket.broadcast.to(socket.id).emit("getsocketDetail", socket.id);
-      io.to(room).to(socket.id).emit("new_player");
+
+      socket.to(room).to(socket.id).emit("new_player");
     }
     // io.to(room).emit("new_user", username);
   });
@@ -109,6 +110,7 @@ io.on("connection", (socket) => {
       .emit("play");
   });
   socket.on("won", (winner, room) => {
+    console.log(winner);
     io.to(room).emit("lost", winner);
   });
   socket.on("disconnect", function () {
