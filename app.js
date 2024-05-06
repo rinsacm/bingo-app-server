@@ -72,8 +72,10 @@ io.on("connection", (socket) => {
   //   socket.broadcast.emit("play");
   // });
   socket.on("start_game", (room) => {
+    console.log(room);
     io.to(room).emit("started");
     let roomInd = checkRoomExists(room);
+    console.log(rooms, roomInd);
     rooms[roomInd]["currPlayerInd"] = 0;
 
     let currPlayerInd = rooms[roomInd]["currPlayerInd"];
@@ -85,8 +87,12 @@ io.on("connection", (socket) => {
         .emit("play");
   });
   socket.on("restart", (room) => {
-    socket.to(room).emit("restart");
-    socket.emit("restart");
+    let roomInd = checkRoomExists(room);
+    console.log(rooms, roomInd);
+    // socket.to(room).emit("datareset");
+    // socket.emit("datareset");
+    socket.to(room).emit("restartclicked");
+    socket.emit("restartclicked");
   });
   socket.on("played", (num, room, socketid) => {
     let roomInd = checkRoomExists(room);
